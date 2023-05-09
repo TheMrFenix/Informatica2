@@ -3,14 +3,14 @@ public class Cajero {
     private int id;
     private String nombre;
     private String email;
-    private String carnetDeConducir;
+    private int carnetDeConducir;
     private String contraseña;
     public Cajero() {
     }
     public int getId() {
         return id;
     }
-    public void setId(String Id) {
+    public void setId(int Id) {
         this.id = id;
     }
     public String getNombre() {
@@ -25,10 +25,10 @@ public class Cajero {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getCarnetDeConducir() {
+    public int getCarnetDeConducir() {
         return carnetDeConducir;
     }
-    public void setCarnetDeConducir(String carnetDeConducir) {
+    public void setCarnetDeConducir(int carnetDeConducir) {
         this.carnetDeConducir = carnetDeConducir;
     }
     public String getContraseña() {

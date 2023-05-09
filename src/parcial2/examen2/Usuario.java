@@ -1,7 +1,7 @@
 package parcial2.examen2;
 public class Usuario extends Pedido{
     private String nombre;
-    private String ci;
+    private int ci;
     private int telefono;
     private String direccion;
     public Usuario() {
@@ -12,10 +12,10 @@ public class Usuario extends Pedido{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public String getCi() {
+    public int getCi() {
         return ci;
     }
-    public void setCi(String ci) {
+    public void setCi(int ci) {
         this.ci = ci;
     }
     public int getTelefono() {
