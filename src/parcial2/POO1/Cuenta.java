@@ -1,6 +1,6 @@
 package parcial2.POO1;
 public class Cuenta {
-    private String nombre;
+    private String nombre="carlos";
     private String apellido;
     private int numeroCuenda;
     private double cantidad;
