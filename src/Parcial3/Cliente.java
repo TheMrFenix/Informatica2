@@ -1,6 +1,8 @@
 package Parcial3;
-import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
+
 public class Cliente {
     private String nombreCE_Clt;
     private int id_Clt;
@@ -33,37 +35,38 @@ public class Cliente {
                 ", Correo Electronica: '" + correoElectronico_Clt + '\'' +
                 '}';
     }
-    public void MenuCliente(){ // no me dio para implementar los labels
-        Scanner sc=new Scanner(System.in);
-        System.out.println("*** Menu de cliente ***");
-        System.out.println("1- Ingresar");
-        System.out.println("2- Registrarse");
-        System.out.print("->");
-        int res= sc.nextInt();
-        switch (res){
-            case 1:
-                System.out.println("-------------------------------------------------");
-                Ingresar();
-                System.out.println("-------------------------------------------------");
-                break;
-            case 2:
-                System.out.println("-------------------------------------------------");
-                Registrar();
-                System.out.println("-------------------------------------------------");
-                break;
-            default:
-                System.out.println("Opcion incorrecta, que tenga un buendia");
+    public void MenuCliente(){
+        Frame frame=new Frame();
+        Icon opcion=new ImageIcon("yourFile.gif");
+        Object optionArray[]={"Ingresar","Registrarse"};
+        int pregunta = JOptionPane.showOptionDialog(frame,"<html> ╔ Menu de Cliento ♦ <br> ║ Ingresar <br> ║ Registrarse <br> ╚ Elija una Opcion","Cliente",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE,opcion,optionArray,optionArray[1]);
+        if (pregunta == JOptionPane.YES_OPTION){
+            Ingresar();
+        }
+        if (pregunta == JOptionPane.NO_OPTION){
+            Registrar();
         }
     }
     public void Ingresar(){
-        Scanner sc=new Scanner(System.in);
-        ArrayList<String> NombreEmpresa=new ArrayList<>();
-        ArrayList<Integer> ID=new ArrayList<>();
-        ArrayList<String> CorreoElectronico=new ArrayList<>();
-        NombreEmpresa.add(0,"Usuario");
-        ID.add(0,001);
-        CorreoElectronico.add(0,"correodeusuario1@email.com");
-        System.out.println();
+
+        JFrame frame= new JFrame();
+        JTextArea textoArea=new JTextArea(5,100);
+        textoArea.setText("");
+        JTextField campoNombre=new JTextField();
+        JTextField campoID=new JTextField();
+        final JTextField campoCorreo=new JTextField();
+        Object[] ingresoCampos={"<html> *Datos defoult si no se registro* <br> (Usuario,001,usuario1@email.com)=[0] <br> ╔ Ingrese sus datos de usuario","╠ Nombre de Empresa: ",campoNombre,"╠ ID: ",campoID,"╚ Correo Electronico: ",campoCorreo};
+
+        int opcion = JOptionPane.showConfirmDialog(frame,ingresoCampos,"Cliente",JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE);
+        if (opcion == JOptionPane.OK_OPTION){
+            String texto = campoNombre.getText()+"\n"+ campoID.getText()+"\n"+campoCorreo.getText();
+            textoArea.setText(texto);
+        }
+
+        ArrayList<ArrayList<String>> datosCliente=new ArrayList<>(20);
+        datosCliente.get(0).add(0,"Usuario");
+        datosCliente.get(0).add(1,"001");
+        datosCliente.get(0).add(2,"usuario1@email.com"); //poner el for para comprovar usuarios
     }
     public void Registrar(){
 

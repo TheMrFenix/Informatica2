@@ -39,4 +39,7 @@ public class Empleado {
                 ", Sueldo: " + sueldo_Emp +
                 '}';
     }
+    public void MenuEmpleados(){
+        System.out.println("empleado");
+    }
 }
