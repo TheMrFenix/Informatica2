@@ -67,6 +67,7 @@ public class Cliente {
         datosCliente.get(0).add(0,"Usuario");
         datosCliente.get(0).add(1,"001");
         datosCliente.get(0).add(2,"usuario1@email.com"); //poner el for para comprovar usuarios
+        
     }
     public void Registrar(){
 
