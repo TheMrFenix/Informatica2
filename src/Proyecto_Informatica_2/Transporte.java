@@ -1,16 +1,12 @@
 package Proyecto_Informatica_2;
+import Parcial3.RutaTransporte;
+import java.util.Scanner;
+import java.util.ArrayList;
 public class Transporte extends Empleado{
-    private String areaTrabajo_Tpt;
     private int carnetConducir_Tpt;
     private String direccion_Tpt;
     private int telefono_Tpt;
     public Transporte() {
-    }
-    public String getAreaTrabajo_Tpt() {
-        return areaTrabajo_Tpt;
-    }
-    public void setAreaTrabajo_Tpt(String areaTrabajo_Tpt) {
-        this.areaTrabajo_Tpt = areaTrabajo_Tpt;
     }
     public int getCarnetConducir_Tpt() {
         return carnetConducir_Tpt;
@@ -33,10 +29,36 @@ public class Transporte extends Empleado{
     @Override
     public String toString() {
         return "Transporte{" +
-                "Area de Trabajo: '" + areaTrabajo_Tpt + '\'' +
-                ", Carnet de Conducir: " + carnetConducir_Tpt + '\'' +
+                "Carnet de Conducir: " + carnetConducir_Tpt + '\'' +
                 ", Direccion: '" + direccion_Tpt + '\'' +
                 ", Telefono/Celular: " + telefono_Tpt +
                 '}';
+    }
+    public void AreaTransporte(){
+        Scanner sc=new Scanner(System.in);
+        Transporte transporte=new Transporte();
+        RutaTransporte rutaTransporte=new RutaTransporte();
+        ArrayList<Transporte> datosTransporte=new ArrayList<>();
+        int op=0;
+        do {
+            System.out.println("╔ Area de transporte");
+            System.out.print("║ 1- Ingresar carnet de conducir:");
+            int cc=sc.nextInt();
+            transporte.setCarnetConducir_Tpt(cc);
+            System.out.print("║ 2- Ingresar direccion:");
+            String dir=sc.next();
+            transporte.setDireccion_Tpt(dir);
+            System.out.print("╚ 3- Ingresar telefono:");
+            int tel=sc.nextInt();
+            transporte.setTelefono_Tpt(tel);
+            System.out.println("Estos son los datos que ingresaste");
+            System.out.println(transporte.toString());
+            datosTransporte.add(transporte);
+            System.out.print("(press 1) if you wanna go back/(press 0) to keep going: ");
+            op=sc.nextInt();
+            if (op == 0) {
+                rutaTransporte.MenuEmpleados();
+            }
+        } while (1!=op);
     }
 }

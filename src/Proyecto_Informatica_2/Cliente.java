@@ -37,45 +37,9 @@ public class Cliente {
     public static void MenuCliente(){
         Scanner sc=new Scanner(System.in);
         Cliente cliente=new Cliente();
-        int opMC=0;
-        do {
-            System.out.println("╔ Menu de Cliento ♦");
-            System.out.println("║ 1- Ingresar");
-            System.out.println("║ 2- Registrarse");
-            System.out.println("║ 3- Volver");
-            System.out.print("╚ Elija una Opcion:");
-            opMC=sc.nextInt();
-            switch (opMC) {
-                case 1:
-                    Ingresar();
-                    break;
-                case 2:
-                    Registrar();
-                    break;
-            }
-        }while (opMC!=3);
-    }
-    public static void Ingresar(){
-
-        /*JFrame frame= new JFrame();
-        JTextArea textoArea=new JTextArea(5,100);
-        textoArea.setText("");
-        JTextField campoNombre=new JTextField();
-        JTextField campoID=new JTextField();
-        final JTextField campoCorreo=new JTextField();
-        Object[] ingresoCampos={"<html> *Datos defoult si no se registro* <br> (Usuario,001,usuario1@email.com)=[0] <br> ╔ Ingrese sus datos de usuario","╠ Nombre de Empresa: ",campoNombre,"╠ ID: ",campoID,"╚ Correo Electronico: ",campoCorreo};
-
-        int opcion = JOptionPane.showConfirmDialog(frame,ingresoCampos,"Cliente",JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE);
-        if (opcion == JOptionPane.OK_OPTION){
-            String texto = campoNombre.getText()+"\n"+ campoID.getText()+"\n"+campoCorreo.getText();
-            textoArea.setText(texto);
-        }*/
-    }
-    public static void Registrar(ArrayList<Cliente> DatosCliente){
-        Scanner sc=new Scanner(System.in);
-        Cliente cliente=new Cliente();
         RutaCliente rc=new RutaCliente();
         Random rnd=new Random();
+        ArrayList<Cliente> DatosCliente=new ArrayList<>();
         int op=0;
         do {
             System.out.println("╔ Registro de usuario");
@@ -86,16 +50,22 @@ public class Cliente {
             System.out.println("║ Codigo id ["+rid+"]");
             System.out.print("║ 2- Ingresar id:");
             int id= sc.nextInt();
-            cliente.setId_Clt(id);
-            System.out.print("╚ 3- Ingresar correo electronico:");
-            String ce= sc.next();
-            cliente.setCorreoElectronico_Clt(ce);
-            System.out.println("Estos son los datos que ingresaste");
-            System.out.println(cliente.toString());
-            DatosCliente.add(cliente);
-            System.out.print("1 if you wanna go back: ");
+            if (id==rid){
+                cliente.setId_Clt(id);
+                System.out.print("╚ 3- Ingresar correo electronico:");
+                String ce= sc.next();
+                cliente.setCorreoElectronico_Clt(ce);
+                System.out.println("Estos son los datos que ingresaste");
+                System.out.println(cliente.toString());
+                DatosCliente.add(cliente);
+            } else {
+                System.out.println("vuelva a intentarlo");
+            }
+            System.out.print("(press 1) if you wanna go back/(press 0) to keep going: ");
             op=sc.nextInt();
-            rc.MenuRutaCliente();
+            if (op == 0) {
+                rc.MenuRutaCliente();
+            }
         }while (op!=1);
     }
 }

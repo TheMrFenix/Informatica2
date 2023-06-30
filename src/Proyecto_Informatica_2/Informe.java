@@ -1,18 +1,12 @@
 package Proyecto_Informatica_2;
-public class InformeTransporte {
-    private String opinionCalidadVehiculo_Tpt;
-    private String opinionCalidadSeguridad_Tpt;
+import java.util.ArrayList;
+import java.util.Scanner;
+public class Informe {
     private String estadoInicialViaje_Tpt;
     private String estadoDuranteViaje_Tpt;
     private String estadoFinalViaje_Tpt;
     private String observaciones_Tpt;
-    public InformeTransporte() {
-    }
-    public String getOpinionCalidadVehiculo_Tpt() {
-        return opinionCalidadVehiculo_Tpt;
-    }
-    public void setOpinionCalidadSeguridad_Tpt(String opinionCalidadSeguridad_Tpt) {
-        this.opinionCalidadSeguridad_Tpt = opinionCalidadSeguridad_Tpt;
+    public Informe() {
     }
     public String getEstadoInicialViaje_Tpt() {
         return estadoInicialViaje_Tpt;
@@ -41,12 +35,36 @@ public class InformeTransporte {
     @Override
     public String toString() {
         return "Informe de Transporte{" +
-                "Opinion sobre Calidad del Vehiculo Asignado: '" + opinionCalidadVehiculo_Tpt + '\'' +
-                ", Opinion sobre la Calidad del equipo de Seguridad: '" + opinionCalidadSeguridad_Tpt + '\'' +
-                ", Estado Inicial del Viaje: '" + estadoInicialViaje_Tpt + '\'' +
+                "Estado Inicial del Viaje: '" + estadoInicialViaje_Tpt + '\'' +
                 ", Estado Durante el Vieaje: '" + estadoDuranteViaje_Tpt + '\'' +
                 ", Estado Final del Viaje: '" + estadoFinalViaje_Tpt + '\'' +
                 ", Observaciones: '" + observaciones_Tpt + '\'' +
                 '}';
+    }
+    public void InformeTransporte(){
+        Scanner sc=new Scanner(System.in);
+        Informe informe=new Informe();
+        ArrayList<Informe> datosInforme=new ArrayList<>();
+        int op=0;
+        do {
+            System.out.println("╔ Informe de Transporte");
+            System.out.print("║ 1- Ingrese el estado inicial del viaje:");
+            String inicial=sc.next();
+            informe.setEstadoInicialViaje_Tpt(inicial);
+            System.out.print("║ 2- Ingrese el estado durante el viaje:");
+            String durante=sc.next();
+            informe.setEstadoDuranteViaje_Tpt(durante);
+            System.out.print("║ 3- Ingrese el estado final del viaje:");
+            String fin=sc.next();
+            informe.setEstadoFinalViaje_Tpt(fin);
+            System.out.print("╚ 4- Ingrese sus observaciones:");
+            String obs=sc.next();
+            informe.setObservaciones_Tpt(obs);
+            datosInforme.add(informe);
+            System.out.println("Estos son los datos que ingresaste");
+            System.out.println(informe.toString());
+            System.out.println("to get the hell out of here press 1:");
+            op=sc.nextInt();
+        } while (op!=1);
     }
 }

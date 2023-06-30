@@ -3,17 +3,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Random;
 public class RutaCliente extends Cliente{
     private int numeroPedido_Clt; // Clt=Cliente
     private String tipoTransporte_Clt; // por tierra, agua o aire.
     private String ciudadSalida_Clt;
     private String ciudadLlegada_Clt;
-    private int horasdias_Viaje_Clt; // Estimado automatico sin Api porque no me da el tiempo
     private String tipoMercancias_Clt;
     private int cantidadMercancias_Clt;
     private double peso_Clt;
     private String destinatario_Clt;
-    private double distancia_Clt; // porque si no no acabo nunca
+    private double distancia_Clt;
     public RutaCliente() {
     }
     public int getNumeroPedido_Clt() {
@@ -39,12 +39,6 @@ public class RutaCliente extends Cliente{
     }
     public void setCiudadLlegada_Clt(String ciudadLlegada_Clt) {
         this.ciudadLlegada_Clt = ciudadLlegada_Clt;
-    }
-    public int getHorasdias_Viaje_Clt() {
-        return horasdias_Viaje_Clt;
-    }
-    public void setHorasdias_Viaje_Clt(int horasdias_Viaje_Clt) {
-        this.horasdias_Viaje_Clt = horasdias_Viaje_Clt;
     }
     public String getTipoMercancias_Clt() {
         return tipoMercancias_Clt;
@@ -83,7 +77,6 @@ public class RutaCliente extends Cliente{
                 ", Tipo de Transporte: '" + tipoTransporte_Clt + '\'' +
                 ", Ciudad de Salida: '" + ciudadSalida_Clt + '\'' +
                 ", Ciudad de Llegada: '" + ciudadLlegada_Clt + '\'' +
-                ", Horas/Dias de Viaje: " + horasdias_Viaje_Clt +
                 ", Tipo de Mercancias: '" + tipoMercancias_Clt + '\'' +
                 ", Cantidad de Mercancias: " + cantidadMercancias_Clt +
                 ", Peso: " + peso_Clt +
@@ -91,32 +84,83 @@ public class RutaCliente extends Cliente{
                 ", Distancia: '" + distancia_Clt + '\'' +
                 '}';
     }
-    public String calcularTiempoEstimado(){
-        Map<String, Double> factoresTiempo=new HashMap<>();
-        factoresTiempo.put("Tierra",1.0);
-        factoresTiempo.put("Mar",2.0);
-        factoresTiempo.put("Aire",0.5);
-        double factorTiempo= factoresTiempo.getOrDefault(tipoTransporte_Clt.toLowerCase(),0.0);
-        if (factorTiempo ==0.0){
-            return "Tipo de transporte no valido";
-        }
-        double tiempoEstimado=(peso_Clt*distancia_Clt)/factorTiempo;
-        return formatearTiempoEstimado(tiempoEstimado);
-    }
-    public String formatearTiempoEstimado(double tiempo){
-        if (tiempo>=24){
-            int dias=(int)tiempo/24;
-            int horas=(int)tiempo%24;
-            return dias+" dias y "+horas+" horas";
-        } else {
-            int horas=(int)tiempo;
-            return horas+" horas";
-        }
-    }
     public void MenuRutaCliente(){
         Scanner sc=new Scanner(System.in);
+        Random rnd=new Random();
+        PagoCliente pc=new PagoCliente();
         RutaCliente rutaCliente=new RutaCliente();
         ArrayList<RutaCliente> DatosRutaCliente=new ArrayList<>();
-
+        int op=0;
+        do {
+            System.out.println("╔ Registro de ruta");
+            int rnp= rnd.nextInt(20);
+            System.out.println("║ Numero de pedido ["+rnp+"]");
+            System.out.print("║ 1- Ingrese numero de pedido:");
+            int nump=sc.nextInt();
+            rutaCliente.setNumeroPedido_Clt(nump);
+            System.out.println("║ Tipos de transporte (Tierra, Agua, Aire)");
+            System.out.print("║ 2- Ingrese tipo de transporte:");
+            String tipot=sc.next();
+            if (tipot.equals("Tierra")||tipot.equals("Agua")||tipot.equals("Aire")){
+                rutaCliente.setTipoTransporte_Clt(tipot);
+                System.out.print("║ 3- Ingresar ciudad de salida:");
+                String cs=sc.next();
+                rutaCliente.setCiudadSalida_Clt(cs);
+                System.out.print("║ 4- Ingresar ciudad de llegada:");
+                String cll=sc.next();
+                rutaCliente.setCiudadLlegada_Clt(cll);
+                System.out.print("║ 5- Ingresar tipo de mercancias:");
+                String tm=sc.next();
+                rutaCliente.setTipoMercancias_Clt(tm);
+                System.out.print("║ 6- Ingresar cantidad de mercancias:");
+                int cm=sc.nextInt();
+                rutaCliente.setCantidadMercancias_Clt(cm);
+                System.out.print("║ 7- Ingresar peso:");
+                double peso=sc.nextDouble();
+                rutaCliente.setPeso_Clt(peso);
+                System.out.print("║ 8- Ingresar destinatario:");
+                String dest=sc.next();
+                rutaCliente.setDestinatario_Clt(dest);
+                System.out.print("╚ 9- Ingresar distancia:");
+                double dist=sc.nextDouble();
+                rutaCliente.setDistancia_Clt(dist);
+                System.out.println("Estos son los datos que ingresaste");
+                System.out.println(rutaCliente.toString());
+                DatosRutaCliente.add(rutaCliente);
+            } else {
+                System.out.println("tipo incorreto");
+            }
+            System.out.println("(press 1) if you wanna go back/(press 0) to keep going:");
+            op=sc.nextInt();
+            if (op==0){
+                pc.CalcularPago();
+            }
+        } while (op!=1);
+    }
+    public void CalcularPago(){
+        Scanner sc=new Scanner(System.in);
+        PagoCliente pagoC=new PagoCliente();
+        ArrayList<PagoCliente> datosDePago=new ArrayList<>();
+        int op=0;
+        do {
+            System.out.println("╔ Datos de pago");
+            System.out.print("║ 1- Ingresar cuenta bancaria:");
+            int cb=sc.nextInt();
+            pagoC.setCuentaBancaria_Clt(cb);
+            System.out.println("║ Cantidad a pagar");
+            System.out.println(pagoC.calcularPago());
+            System.out.print("╚ 2- Ingresar la cantidad de pago:");
+            double can=sc.nextDouble();
+            if (can== pagoC.calcularPago()) {
+                pagoC.setCantidadPago_Clt(can);
+                System.out.println("Datos ingrasados");
+                System.out.println(pagoC.toString());
+                datosDePago.add(pagoC);
+            } else {
+                System.out.println("vuelva a intentarlo");
+            }
+            System.out.println("(press 1) if you wanna go back/(press 0) to keep going:");
+            op=sc.nextInt();
+        } while (op!=1);
     }
 }

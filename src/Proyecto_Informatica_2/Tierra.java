@@ -1,18 +1,13 @@
 package Proyecto_Informatica_2;
-public class TransporteTierra extends RutaTransporte{
-    private String  tipoVehiculo_Tpt;
+import java.util.ArrayList;
+import java.util.Scanner;
+public class Tierra extends RutaTransporte{
     private int  cantidadMercancias_Tpt;
     private double pesoMercancias_Tpt;
     private String proveedor_Tpt;
     private String destinatario_Tpt;
     private String posicionTrabajo_Tpt;
-    public TransporteTierra() {
-    }
-    public String getTipoVehiculo_Tpt() {
-        return tipoVehiculo_Tpt;
-    }
-    public void setTipoVehiculo_Tpt(String tipoVehiculo_Tpt) {
-        this.tipoVehiculo_Tpt = tipoVehiculo_Tpt;
+    public Tierra() {
     }
     public int getCantidadMercancias_Tpt() {
         return cantidadMercancias_Tpt;
@@ -47,12 +42,41 @@ public class TransporteTierra extends RutaTransporte{
     @Override
     public String toString() {
         return "Transporte por Tierra{" +
-                "Tipo de Vehiculo: '" + tipoVehiculo_Tpt + '\'' +
-                ", Cantidad de Mercancias: " + cantidadMercancias_Tpt +
+                "Cantidad de Mercancias: " + cantidadMercancias_Tpt +
                 ", Peso de Mercancias: " + pesoMercancias_Tpt +
                 ", Proveedor: '" + proveedor_Tpt + '\'' +
                 ", Destinatario: '" + destinatario_Tpt + '\'' +
                 ", Posicion de Trabajo: '" + posicionTrabajo_Tpt + '\'' +
                 '}';
+    }
+    public void MenuTierra(){
+        Scanner sc=new Scanner(System.in);
+        RutaCliente rc=new RutaCliente();
+        Cliente cliente=new Cliente();
+        Tierra tierra=new Tierra();
+        ArrayList<Tierra> DatosTierra=new ArrayList<>();
+        Informe informe=new Informe();
+        int op=0;
+        do {
+            System.out.println("╔ Area Terrestre");
+            System.out.println("║ 1- Cantidad de mercancias asignada");
+            System.out.println(rc.getCantidadMercancias_Clt());
+            tierra.setCantidadMercancias_Tpt(rc.getCantidadMercancias_Clt());
+            System.out.println("║ 2- Peso de mercancias asignada");
+            System.out.println(rc.getPeso_Clt());
+            tierra.setPesoMercancias_Tpt(rc.getPeso_Clt());
+            System.out.println("║ 3- Proveedor asignado");
+            System.out.println(cliente.getNombreCE_Clt());
+            tierra.setProveedor_Tpt(cliente.getNombreCE_Clt());
+            System.out.println("╚ 4- Destinatario asignado");
+            System.out.println(rc.getDestinatario_Clt());
+            tierra.setDestinatario_Tpt(rc.getDestinatario_Clt());
+            DatosTierra.add(tierra);
+            System.out.print("(press 1) if you wanna go back/(press 0) to keep going: ");
+            op=sc.nextInt();
+            if (op == 0) {
+                informe.InformeTransporte();
+            }
+        } while (op!=1);
     }
 }

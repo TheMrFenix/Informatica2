@@ -1,12 +1,14 @@
 package Proyecto_Informatica_2;
-public class TransporteAire extends RutaTransporte{
+import java.util.ArrayList;
+import java.util.Scanner;
+public class Aire extends RutaTransporte{
     private String  tipoVehiculo_Tpt;
     private int  cantidadMercancias_Tpt;
     private double pesoMercancias_Tpt;
     private String proveedor_Tpt;
     private String destinatario_Tpt;
     private String posicionTrabajo_Tpt;
-    public TransporteAire() {
+    public Aire() {
     }
     public String getTipoVehiculo_Tpt() {
         return tipoVehiculo_Tpt;
@@ -54,5 +56,35 @@ public class TransporteAire extends RutaTransporte{
                 ", Destinatario: '" + destinatario_Tpt + '\'' +
                 ", Posicion de Trabajo: '" + posicionTrabajo_Tpt + '\'' +
                 '}';
+    }
+    public void MenuAire(){
+        Scanner sc=new Scanner(System.in);
+        RutaCliente rc=new RutaCliente();
+        Cliente cliente=new Cliente();
+        Aire aire=new Aire();
+        ArrayList<Aire> DatosAire=new ArrayList<>();
+        Informe informe=new Informe();
+        int op=0;
+        do {
+            System.out.println("╔ Area Aerea");
+            System.out.println("║ 1- Cantidad de mercancias asignada");
+            System.out.println(rc.getCantidadMercancias_Clt());
+            aire.setCantidadMercancias_Tpt(rc.getCantidadMercancias_Clt());
+            System.out.println("║ 2- Peso de mercancias asignada");
+            System.out.println(rc.getPeso_Clt());
+            aire.setPesoMercancias_Tpt(rc.getPeso_Clt());
+            System.out.println("║ 3- Proveedor asignado");
+            System.out.println(cliente.getNombreCE_Clt());
+            aire.setProveedor_Tpt(cliente.getNombreCE_Clt());
+            System.out.println("╚ 4- Destinatario asignado");
+            System.out.println(rc.getDestinatario_Clt());
+            aire.setDestinatario_Tpt(rc.getDestinatario_Clt());
+            DatosAire.add(aire);
+            System.out.print("(press 1) if you wanna go back/(press 0) to keep going: ");
+            op=sc.nextInt();
+            if (op == 0) {
+                informe.InformeTransporte();
+            }
+        } while (op!=1);
     }
 }

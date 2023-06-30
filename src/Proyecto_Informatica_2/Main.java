@@ -5,7 +5,6 @@ public class Main {
     public static void main(String[] args) {
         Cliente cliente=new Cliente();
         Empleado empleado=new Empleado();
-        ArrayList<Cliente> DatosCliente=new ArrayList<>();
         ArrayList<Empleado> Datos=new ArrayList<>();
         Scanner sc=new Scanner(System.in);
         int opMain=0;
@@ -19,10 +18,9 @@ public class Main {
             switch (opMain){
                 case 1:
                     cliente.MenuCliente();
-                    DatosCliente.add(cliente);
                     break;
                 case 2:
-                    empleado.MenuEmpleados();
+                    empleado.MenuEmpleado();
                     break;
             }
         } while (opMain!=3);
